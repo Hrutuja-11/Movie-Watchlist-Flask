@@ -7,11 +7,3 @@ flask-security
 email_validator
 passlib
 requests
-Blueprint
-current_app
-redirect
-render_template
-session
-url_for
-request
-flash
