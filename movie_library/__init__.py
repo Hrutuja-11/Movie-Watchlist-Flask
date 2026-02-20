@@ -14,7 +14,7 @@ def create_app():
     app.config["SECRET_KEY"] = os.environ.get(
         "SECRET_KEY", "pf9Wkove4IKEAXvy-cQkeDPhv9Cb3Ag-wyJILbq_dFw"
     )
-    app.db = MongoClient(app.config["MONGODB_URI"]).get_default_database()
+    # app.db = MongoClient(app.config["MONGODB_URI"]).get_default_database()
 
     @app.context_processor
     def inject_user_data():
