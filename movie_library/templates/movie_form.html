@@ -1,0 +1,100 @@
+{% from "macros/fields.html" import render_text_field, render_area_field %}
+{% extends "layout.html" %}
+
+{% block head_content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}"/>
+{% endblock %}
+
+{% block main_content %}
+<div class="form-page">
+    <div class="form-page__header">
+        <a href="{{ url_for('pages.movie', _id=movie._id) }}" class="form-page__back">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Movie
+        </a>
+    </div>
+    
+    <div class="form-card form-card--wide">
+        <div class="form-card__header">
+            <div class="form-card__icon form-card__icon--edit">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+            </div>
+            <h1 class="form-card__title">Edit Movie</h1>
+            <p class="form-card__subtitle">Update details for "{{ movie.title }}"</p>
+        </div>
+        
+        <form name="edit_movie" method="post" novalidate class="form-card__form">
+            {{ form.hidden_tag() }}
+            
+            <!-- Basic Info Section -->
+            <div class="form-card__section">
+                <h3 class="form-card__section-title">Basic Information</h3>
+                <div class="form-card__grid">
+                    <div class="form-card__group">
+                        <label class="form-card__label">Movie Title</label>
+                        {{ form.title(class_="form-card__input", placeholder="Enter movie title") }}
+                    </div>
+                    
+                    <div class="form-card__group">
+                        <label class="form-card__label">Director</label>
+                        {{ form.director(class_="form-card__input", placeholder="Enter director name") }}
+                    </div>
+                    
+                    <div class="form-card__group">
+                        <label class="form-card__label">Release Year</label>
+                        {{ form.year(class_="form-card__input", placeholder="e.g., 2024") }}
+                    </div>
+                    
+                    <div class="form-card__group">
+                        <label class="form-card__label">Video Link (YouTube/Vimeo)</label>
+                        {{ form.video_link(class_="form-card__input", placeholder="https://www.youtube.com/embed/...") }}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Description Section -->
+            <div class="form-card__section">
+                <h3 class="form-card__section-title">Description</h3>
+                <div class="form-card__group">
+                    <label class="form-card__label">Movie Description</label>
+                    {{ form.description(class_="form-card__textarea", placeholder="Write a brief description of the movie...", rows="4") }}
+                </div>
+            </div>
+            
+            <!-- Cast & Crew Section -->
+            <div class="form-card__section">
+                <h3 class="form-card__section-title">Cast & Details</h3>
+                <div class="form-card__grid">
+                    <div class="form-card__group">
+                        <label class="form-card__label">Cast (one per line)</label>
+                        {{ form.cast(class_="form-card__textarea", placeholder="Actor 1\nActor 2\nActor 3", rows="4") }}
+                    </div>
+                    
+                    <div class="form-card__group">
+                        <label class="form-card__label">Series/Franchise (one per line)</label>
+                        {{ form.series(class_="form-card__textarea", placeholder="Movie 1\nMovie 2\nMovie 3", rows="4") }}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tags Section -->
+            <div class="form-card__section">
+                <h3 class="form-card__section-title">Tags</h3>
+                <div class="form-card__group">
+                    <label class="form-card__label">Tags (one per line)</label>
+                    {{ form.tags(class_="form-card__textarea", placeholder="Action\nThriller\nSci-Fi", rows="3") }}
+                </div>
+            </div>
+            
+            <div class="form-card__actions">
+                {{ form.submit(class_="form-card__button form-card__button--primary") }}
+                <a href="{{ url_for('pages.movie', _id=movie._id) }}" class="form-card__button form-card__button--secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% from "macros/fields.html" import render_text_field %}
+{% extends "layout.html" %}
+
+{% block head_content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}"/>
+{% endblock %}
+
+{% block main_content %}
+<div class="form-page">
+    <div class="form-card">
+        <div class="form-card__header">
+            <div class="form-card__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                </svg>
+            </div>
+            <h1 class="form-card__title">Welcome Back</h1>
+            <p class="form-card__subtitle">Sign in to your Movie Watchlist account</p>
+        </div>
+        
+        <form name="login" method="post" novalidate class="form-card__form">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {%- for category, message in messages %}
+                    <div class="form-card__alert form-card__alert--{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endwith %}
+            
+            {{ form.hidden_tag() }}
+            
+            <div class="form-card__group">
+                <label class="form-card__label">Email Address</label>
+                {{ form.email(class_="form-card__input", placeholder="Enter your email") }}
+            </div>
+            
+            <div class="form-card__group">
+                <label class="form-card__label">Password</label>
+                {{ form.password(class_="form-card__input", placeholder="Enter your password") }}
+            </div>
+            
+            <div class="form-card__actions form-card__actions--column">
+                {{ form.submit(class_="form-card__button form-card__button--primary form-card__button--full") }}
+            </div>
+            
+            <div class="form-card__footer">
+                <p>Don't have an account? <a href="{{ url_for('pages.register') }}" class="form-card__link">Register here</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

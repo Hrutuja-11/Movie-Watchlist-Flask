@@ -1,0 +1,541 @@
+:root {
+  --text-dark: #1E293B;         /* Slate 800 */
+  --text-light: #FFFFFF;
+  --text-muted: #64748B;        /* Slate 500 */
+
+  --background-color: #F3F4F6;  /* Slate 50 */
+  --surface-color: #FFFFFF;     /* For inputs/cards if needed */
+
+  --accent-colour: #0EA5E9;     /* Cyan */
+  --accent-colour-2: #14B8A6;   /* Teal */
+  --tag-colour: #E2E8F0;        /* Slate 200 */
+
+  --border: 3px solid #CBD5E1;  /* Slate 300 (kept 3px because YOU used 3px) */
+}
+
+
+
+:root.dark-mode {
+  --text-dark: #E2E8F0;         /* Slate 200 */
+  --text-light: #0F172A;
+  --text-muted: #9CA3AF;        /* Slate 400 */
+
+  --background-color: #020617;  /* Very deep slate */
+  --surface-color: #020617;     /* Card background a bit brighter */
+
+  --accent-colour: #38BDF8;     /* Cyan glow */
+  --accent-colour-2: #2DD4BF;   /* Teal highlight */
+  --tag-colour: #0B1220;
+
+  --border: 3px solid #1E293B;  /* Darker slate */
+}
+
+/* Smooth theme + hover transitions */
+* {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.18s ease;
+}
+
+
+
+
+.button {
+  background-color: #E5E7EB;
+  color: #1A1A1A;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  transition: 0.2s ease;
+}
+
+.button:hover {
+  background-color: #D1D5DB;
+}
+
+:root.dark-mode .button {
+  background-color: #2F2F2F;
+  color: #F3F4F6;
+}
+
+:root.dark-mode .button:hover {
+  background-color: #3A3A3A;
+}
+
+.form__field {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-dark);
+}
+
+
+.form__field,
+.nav__link {
+  --border: 3px solid #f56565;
+}
+
+html {
+  /* Sets global font size on small devices */
+  font-size: 12px;
+}
+
+/* When the screen width hits 960px, we increase the global font size to 14px. This changes
+   the scale of all of our relative units (the rems), keeping everything in proportion */
+@media screen and (min-width: 60em) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* When the screen width hits 1200px, we once again increase the global font size, this time to 16px */
+@media screen and (min-width: 75em) {
+  html {
+    font-size: 18px;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  /* Sets the shared font characteristics, so that that they can be inherited globally */
+  font-family: "Public Sans", sans-serif;
+  color: var(--text-dark);
+  line-height: 1.45;
+  background-color: var(--background-color);
+}
+
+.main{
+  flex-grow: 1;
+  padding: 3rem 1.5rem 2rem 1.5rem;
+}
+
+@media screen and (min-width: 30rem) {
+  .main{
+    padding-top: 5rem;
+  }
+} 
+.header{
+  padding: 0 2rem;
+  border-bottom: var(--border);
+}
+
+.header__logo{
+  display: flex;
+  align-items: center;
+  height: 4rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.header__logo:hover{
+  color: var(--accent-colour);
+}
+
+.logo__icon{
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.logo__name{
+  margin-left: 0.5rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.nav-container{
+  display: flex;
+  justify-content: space-between;
+  max-width: 75rem;
+  margin: 0 auto;
+}
+
+.nav{
+  display: flex;
+}
+
+.nav__link{
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav__link--active{
+  background: var(--accent-colour);
+  color: var(--text-light);
+}
+
+.nav__link:not(:last-child){
+  margin-right: 1rem;
+}
+
+.nav__link:hover{
+  margin-bottom: -3px;
+  border-bottom: var(--border);
+}
+
+.nav__link .nav__item{
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.nav__icon{
+  width: 1em;
+  height: 1em;
+}
+
+.footer{
+  padding: 1rem 0;
+  color: var(--text-muted);
+  text-align: center;
+}
+/* Button styles that we'll share across our site */
+.button {
+  /* In order to easily position our buttons, we're making them block level elements */
+  display: block;
+
+  /* Removes any outlines added when the button is in focus */
+  outline: none;
+
+  /* Setting the cursor to pointer indicates to a user that the button is a clickable element */
+  cursor: pointer;
+
+  /* Again, with buttons we have to be explicit about inheriting font properties */
+  font-size: inherit;
+  font-family: inherit;
+
+  /* Slows the background colour change effect when we hover over the button, making
+       it take 0.1s with an accelerating colour change */
+  transition: background 0.1s ease-in;
+}
+
+/* Utility class to use on links within text. */
+.link {
+  text-decoration: none;
+  color: var(--accent-colour);
+  white-space: nowrap;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Profile Dropdown Styles */
+.profile-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.profile-dropdown__trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  cursor: pointer;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.profile-dropdown__trigger:hover {
+  background: var(--tag-colour);
+  border-color: var(--accent-colour);
+}
+
+.profile-dropdown__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-colour);
+}
+
+.profile-dropdown__avatar-placeholder {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent-colour);
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.profile-dropdown__arrow {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+
+.profile-dropdown:hover .profile-dropdown__arrow {
+  transform: rotate(180deg);
+}
+
+.profile-dropdown__menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 280px;
+  background: var(--background-color);
+  border: var(--border);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.profile-dropdown:hover .profile-dropdown__menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.profile-dropdown__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--tag-colour);
+}
+
+.profile-dropdown__header-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-colour);
+}
+
+.profile-dropdown__header-avatar-placeholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent-colour);
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.profile-dropdown__header-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-dropdown__name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+.profile-dropdown__email {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.profile-dropdown__divider {
+  height: 1px;
+  background: var(--tag-colour);
+  margin: 0.25rem 0;
+}
+
+.profile-dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  transition: background 0.15s ease;
+}
+
+.profile-dropdown__item:hover {
+  background: var(--tag-colour);
+}
+
+.profile-dropdown__item--danger {
+  color: var(--accent-colour);
+}
+
+.profile-dropdown__item--danger:hover {
+  background: rgba(245, 101, 101, 0.1);
+}
+
+.profile-dropdown__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.profile-dropdown__badge {
+  margin-left: auto;
+  background: var(--accent-colour);
+  color: var(--text-light);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Navigation Search Bar */
+.nav-search-form,
+.nav__search {
+  display: flex;
+  align-items: center;
+  background: var(--background-color);
+  border: var(--border);
+  border-radius: 50px;
+  padding: 0.25rem;
+  margin: 1rem 13rem;
+  margin-top: 0.5rem;
+  flex: 1;
+  max-width: 400px;
+  height: min-content;
+  animation: fadeIn 0.3s ease-out;
+  transition: all 0.3s ease;
+}
+
+.nav-search-form:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.nav-search-input,
+.nav__search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  outline: none;
+  color: unset;
+  transition: all 0.3s ease;
+}
+
+.nav-search-input::placeholder {
+  color: var(--text-muted);
+  background-color: unset;
+}
+
+.nav-search-button {
+  background: var(--accent-colour);
+  border: none;
+  border-radius: 50px;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.nav-search-button:hover {
+  background: #e04545;
+  transform: scale(1.1);
+}
+
+.nav-search-icon {
+  width: 20px;
+  height: 20px;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+/* Animated elements */
+.animated-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animated-slideInLeft {
+  animation: slideInLeft 0.5s ease-out;
+}
+
+.animated-slideInRight {
+  animation: slideInRight 0.5s ease-out;
+}
+
+.animated-pulse {
+  animation: pulse 2s infinite;
+}
+
+/* ===== Soft Animations ===== */
+.movie-card {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.4s ease forwards;
+}
+
+.movie-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

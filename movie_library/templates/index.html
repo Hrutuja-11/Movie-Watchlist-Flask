@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% from "macros/svgs.html" import star %}
+
+{% block head_content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/movies.css') }}">
+{% endblock %}
+
+{% block main_content %}
+<div class="movies-page">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header__content">
+            <h1 class="page-header__title">My Watchlist</h1>
+            <p class="page-header__subtitle">{{ movies_data|length if movies_data else 0 }} movies in your collection</p>
+        </div>
+        <a href="{{ url_for('pages.add_movie') }}" class="button button--primary">
+            <svg xmlns="http://www.w3.org/2000/svg" class="button__icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            Add Movie
+        </a>
+    </div>
+
+    {% if movies_data %}
+        <!-- Movie Grid -->
+        <div class="movies-grid">
+            {% for movie in movies_data %}
+                <div class="movie-card">
+                    <div class="movie-card__header">
+                        <div class="movie-card__year">{{ movie.year }}</div>
+                        {% if movie.rating > 0 %}
+                            <div class="movie-card__rating">
+                                {{ star("movie-card__star") }}
+                                <span>{{ movie.rating }}/5</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="movie-card__content">
+                        <h3 class="movie-card__title">{{ movie.title }}</h3>
+                        <p class="movie-card__director">Directed by {{ movie.director }}</p>
+                        {% if movie.description %}
+                            <p class="movie-card__description">{{ movie.description[:100] }}{% if movie.description|length > 100 %}...{% endif %}</p>
+                        {% endif %}
+                        {% if movie.tags %}
+                            <div class="movie-card__tags">
+                                {% for tag in movie.tags[:3] %}
+                                    <span class="movie-card__tag">{{ tag }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="movie-card__footer">
+                        {% if movie.last_watched %}
+                            <span class="movie-card__watched">Watched {{ movie.last_watched.strftime('%b %d, %Y') }}</span>
+                        {% else %}
+                            <span class="movie-card__watched movie-card__watched--not">Not watched yet</span>
+                        {% endif %}
+                        <a href="{{ url_for('pages.movie', _id=movie._id) }}" class="movie-card__link">View Details</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- Empty State -->
+        <div class="empty-state">
+            <div class="empty-state__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+                </svg>
+            </div>
+            <h2 class="empty-state__title">Your watchlist is empty</h2>
+            <p class="empty-state__text">Start building your movie collection by adding your first movie.</p>
+            <a href="{{ url_for('pages.add_movie') }}" class="button button--primary button--large">
+                <svg xmlns="http://www.w3.org/2000/svg" class="button__icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                Add Your First Movie
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

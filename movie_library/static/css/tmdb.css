@@ -1,0 +1,652 @@
+/* TMDB Pages Styles */
+
+.tmdb-page {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Search Header */
+.tmdb-search-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem 0;
+}
+
+.tmdb-search-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 1.5rem 0;
+    color: var(--text-dark);
+}
+
+.tmdb-search-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.tmdb-search-input-group {
+    position: relative;
+    display: flex;
+}
+
+.tmdb-search-input {
+    flex: 1;
+    padding: 1rem 1rem 1rem 3rem;
+    font-size: 1rem;
+    border: 2px solid var(--tag-colour);
+    border-radius: 8px;
+    background: var(--background-color);
+    color: var(--text-dark);
+    transition: all 0.2s ease;
+}
+
+.tmdb-search-input:focus {
+    outline: none;
+    border-color: var(--accent-colour);
+    box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.1);
+}
+
+.tmdb-search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--text-muted);
+}
+
+.tmdb-search-button {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--accent-colour);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.tmdb-search-button:hover {
+    background: #e04545;
+}
+
+/* Results Header */
+.tmdb-results-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.tmdb-results-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-dark);
+}
+
+.tmdb-results-count {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* Movie Grid */
+.tmdb-movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.tmdb-movie-card {
+    background: var(--background-color);
+    border: var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 19rem;
+    animation: fadeIn 0.5s ease-out;
+    transform: translateY(20px);
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.tmdb-movie-card:nth-child(1) { animation-delay: 0.1s; }
+.tmdb-movie-card:nth-child(2) { animation-delay: 0.2s; }
+.tmdb-movie-card:nth-child(3) { animation-delay: 0.3s; }
+.tmdb-movie-card:nth-child(4) { animation-delay: 0.4s; }
+.tmdb-movie-card:nth-child(5) { animation-delay: 0.5s; }
+.tmdb-movie-card:nth-child(6) { animation-delay: 0.6s; }
+
+.tmdb-movie-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.tmdb-movie-poster {
+    position: relative;
+    padding-top: 140%;
+    background: var(--tag-colour);
+}
+
+.tmdb-movie-poster-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tmdb-movie-poster-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--tag-colour);
+}
+
+.tmdb-movie-poster-icon {
+    width: 40%;
+    height: 40%;
+    color: var(--text-muted);
+}
+
+.tmdb-movie-content {
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tmdb-movie-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-dark);
+    line-height: 1.3;
+}
+
+.tmdb-movie-year {
+    font-size: 0.85rem;
+    background: none;
+    color: var(--text-muted);
+    margin: 0 0 0.75rem 0;
+}
+
+.tmdb-movie-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.85rem;
+    color: var(--accent-colour);
+    margin-top: auto;
+    padding-top: 0.5rem;
+}
+
+.tmdb-rating-star {
+    width: 16px;
+    height: 16px;
+    fill: var(--accent-colour);
+}
+
+.tmdb-movie-actions {
+    margin-top: 1rem;
+}
+
+.tmdb-movie-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.tmdb-movie-button--view {
+    background: var(--accent-colour);
+    color: white;
+}
+
+.tmdb-movie-button--view:hover {
+    background: #e04545;
+}
+
+/* Pagination */
+.tmdb-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.tmdb-pagination-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--background-color);
+    border: var(--border);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.tmdb-pagination-link:hover {
+    background: var(--tag-colour);
+}
+
+.tmdb-pagination-info {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Empty States */
+.tmdb-empty-state,
+.tmdb-welcome {
+    text-align: center;
+    padding: 3rem 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.tmdb-empty-icon,
+.tmdb-welcome-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    color: var(--text-muted);
+}
+
+.tmdb-empty-icon svg,
+.tmdb-welcome-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.tmdb-empty-title,
+.tmdb-welcome-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    color: var(--text-dark);
+}
+
+.tmdb-empty-text,
+.tmdb-welcome-text {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Back Navigation */
+.tmdb-back-nav {
+    margin-bottom: 1.5rem;
+}
+
+.tmdb-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.tmdb-back-link:hover {
+    color: var(--accent-colour);
+}
+
+.tmdb-back-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Movie Hero */
+.tmdb-movie-hero {
+    position: relative;
+    margin-bottom: 2rem;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--tag-colour);
+}
+
+.tmdb-movie-backdrop {
+    position: relative;
+}
+
+.tmdb-movie-backdrop-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.tmdb-movie-backdrop-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 60%);
+}
+
+.tmdb-movie-hero-content {
+    position: relative;
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.tmdb-movie-poster-large {
+    flex-shrink: 0;
+    width: 200px;
+    height: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    background: var(--tag-colour);
+}
+
+.tmdb-movie-poster-large-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tmdb-movie-poster-large-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tmdb-movie-poster-large-icon {
+    width: 40%;
+    height: 40%;
+    color: var(--text-muted);
+}
+
+.tmdb-movie-info {
+    flex: 1;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.tmdb-movie-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-dark);
+}
+
+.tmdb-movie-tagline {
+    font-size: 1.1rem;
+    font-style: italic;
+    margin: 0 0 1.5rem 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tmdb-movie-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.tmdb-movie-year,
+.tmdb-movie-runtime {
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+}
+
+.tmdb-movie-rating-large {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+}
+
+.tmdb-rating-star-large {
+    width: 20px;
+    height: 20px;
+    fill: var(--accent-colour);
+}
+
+.tmdb-movie-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.tmdb-movie-genre {
+    background: rgba(245, 101, 101, 0.2);
+    color: white;
+    font-size: 0.9rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    border: 1px solid var(--accent-colour);
+}
+
+.tmdb-add-form {
+    margin-top: auto;
+}
+
+.tmdb-add-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--accent-colour);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tmdb-add-button:hover {
+    background: #e04545;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(245, 101, 101, 0.4);
+}
+
+/* Movie Details */
+.tmdb-movie-details {
+    background: var(--background-color);
+    border: var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.tmdb-movie-section {
+    margin-bottom: 2rem;
+}
+
+.tmdb-movie-section:last-child {
+    margin-bottom: 0;
+}
+
+.tmdb-movie-section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tmdb-movie-section-title::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: var(--accent-colour);
+    border-radius: 2px;
+}
+
+.tmdb-movie-overview {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-dark);
+}
+
+.tmdb-movie-director {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+/* Cast Grid */
+.tmdb-cast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.5rem;
+}
+
+.tmdb-cast-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.tmdb-cast-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+    background: var(--tag-colour);
+}
+
+.tmdb-cast-photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tmdb-cast-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tmdb-cast-photo-icon {
+    width: 50%;
+    height: 50%;
+    color: var(--text-muted);
+}
+
+.tmdb-cast-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin: 0 0 0.25rem 0;
+    color: var(--text-dark);
+}
+
+.tmdb-cast-character {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Trailer */
+.tmdb-trailer-container {
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--tag-colour);
+}
+
+.tmdb-trailer-player {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: none;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .tmdb-movie-hero-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .tmdb-movie-poster-large {
+        width: 150px;
+        height: 225px;
+    }
+    
+    .tmdb-movie-title {
+        font-size: 2rem;
+    }
+    
+    .tmdb-movie-meta {
+        justify-content: center;
+    }
+    
+    .tmdb-movie-genres {
+        justify-content: center;
+    }
+    
+    .tmdb-cast-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    
+    .tmdb-movie-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .tmdb-search-title {
+        font-size: 1.5rem;
+    }
+    
+    .tmdb-movie-hero-content {
+        padding: 1rem;
+    }
+    
+    .tmdb-movie-details {
+        padding: 1rem;
+    }
+    
+    .tmdb-cast-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+}

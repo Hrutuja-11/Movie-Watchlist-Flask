@@ -1,0 +1,57 @@
+{% from "macros/fields.html" import render_text_field %}
+{% extends "layout.html" %}
+
+{% block head_content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}"/>
+{% endblock %}
+
+{% block main_content %}
+<div class="form-page">
+    <div class="form-card">
+        <div class="form-card__header">
+            <div class="form-card__icon form-card__icon--register">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                </svg>
+            </div>
+            <h1 class="form-card__title">Create Account</h1>
+            <p class="form-card__subtitle">Join Movie Watchlist and start tracking your movies</p>
+        </div>
+        
+        <form name="register" method="post" novalidate class="form-card__form">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {%- for category, message in messages %}
+                    <div class="form-card__alert form-card__alert--{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endwith %}
+            
+            {{ form.hidden_tag() }}
+            
+            <div class="form-card__group">
+                <label class="form-card__label">Email Address</label>
+                {{ form.email(class_="form-card__input", placeholder="Enter your email") }}
+            </div>
+            
+            <div class="form-card__group">
+                <label class="form-card__label">Password</label>
+                {{ form.password(class_="form-card__input", placeholder="Create a password") }}
+            </div>
+            
+            <div class="form-card__group">
+                <label class="form-card__label">Confirm Password</label>
+                {{ form.confirm_password(class_="form-card__input", placeholder="Confirm your password") }}
+            </div>
+            
+            <div class="form-card__actions form-card__actions--column">
+                {{ form.submit(class_="form-card__button form-card__button--primary form-card__button--full") }}
+            </div>
+            
+            <div class="form-card__footer">
+                <p>Already have an account? <a href="{{ url_for('pages.login') }}" class="form-card__link">Log in here</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block head_content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tmdb.css') }}">
+{% endblock %}
+
+{% block main_content %}
+
+<div class="tmdb-page">
+    <h2 class="tmdb-results-title">Featured Movies</h2>
+
+    <div class="tmdb-movie-grid">
+        {% for movie in movies %}
+        <div class="tmdb-movie-card">
+
+            <div class="tmdb-movie-poster">
+                {% if movie.poster_path %}
+                    <img class="tmdb-movie-poster-img"
+                         src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
+                         alt="{{ movie.title }}">
+                {% else %}
+                    <div class="tmdb-movie-poster-placeholder">
+                        <svg class="tmdb-movie-poster-icon">
+                            <use href="#icon-movie"></use>
+                        </svg>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="tmdb-movie-content">
+
+                <h3 class="tmdb-movie-title">{{ movie.title }}</h3>
+
+                <p class="tmdb-movie-year">
+                    {{ movie.release_date[:4] }} • Directed by {{ movie.director }}
+                </p>
+
+                <div class="tmdb-movie-rating">
+                    <svg class="tmdb-rating-star">
+                        <use href="#icon-star"></use>
+                    </svg>
+                    {{ movie.vote_average }}
+                </div>
+
+                <div class="tmdb-movie-actions">
+                    <a class="tmdb-movie-button tmdb-movie-button--view"
+                       href="/tmdb/movie/{{ movie.id }}">
+                        View Details
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

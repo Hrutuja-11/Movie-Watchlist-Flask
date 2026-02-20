@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+
+{% block head_content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tmdb.css') }}">
+{% endblock %}
+
+{% block main_content %}
+<div class="tmdb-page">
+    <!-- Search Header -->
+    <div class="tmdb-search-header">
+        <h1 class="tmdb-search-title">Search Movies</h1>
+        <form method="GET" action="{{ url_for('pages.search') }}" class="tmdb-search-form">
+            <div class="tmdb-search-input-group">
+                <input 
+                    type="text" 
+                    name="q" 
+                    value="{{ query or '' }}" 
+                    placeholder="Search for movies..." 
+                    class="tmdb-search-input"
+                    autocomplete="off"
+                    required
+                >
+                <button type="submit" class="tmdb-search-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="tmdb-search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Search Results -->
+    {% if query %}
+        {% if results and results.movies %}
+            <div class="tmdb-results-header">
+                <h2 class="tmdb-results-title">Search Results for "{{ query }}"</h2>
+                <p class="tmdb-results-count">{{ results.total_results }} movies found</p>
+            </div>
+            
+            <div class="tmdb-movie-grid">
+                {% for movie in results.movies %}
+                    <div class="tmdb-movie-card">
+                        <div class="tmdb-movie-poster">
+                            {% if movie.poster_url %}
+                                <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" class="tmdb-movie-poster-img">
+                            {% else %}
+                                <div class="tmdb-movie-poster-placeholder">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="tmdb-movie-poster-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+                                    </svg>
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="tmdb-movie-content">
+                            <h3 class="tmdb-movie-title">{{ movie.title }}</h3>
+                            
+                            {% if movie.release_date %}
+                                <p class="tmdb-movie-year">{{ movie.release_date.split('-')[0] }}</p>
+                            {% endif %}
+                            
+                            {% if movie.vote_average %}
+                                <div class="tmdb-movie-rating">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="tmdb-rating-star" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.784.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                                    </svg>
+                                    <span>{{ "%.1f"|format(movie.vote_average) }}/10</span>
+                                </div>
+                            {% endif %}
+                            
+                            <div class="tmdb-movie-actions">
+                                <a href="{{ url_for('pages.tmdb_movie', movie_id=movie.id) }}" class="tmdb-movie-button tmdb-movie-button--view">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Pagination -->
+            {% if results.total_pages > 1 %}
+                <div class="tmdb-pagination">
+                    {% if results.page > 1 %}
+                        <a href="{{ url_for('pages.search', q=query, page=results.page-1) }}" class="tmdb-pagination-link tmdb-pagination-link--prev">
+                            Previous
+                        </a>
+                    {% endif %}
+                    
+                    <span class="tmdb-pagination-info">
+                        Page {{ results.page }} of {{ results.total_pages }}
+                    </span>
+                    
+                    {% if results.page < results.total_pages %}
+                        <a href="{{ url_for('pages.search', q=query, page=results.page+1) }}" class="tmdb-pagination-link tmdb-pagination-link--next">
+                            Next
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="tmdb-empty-state">
+                <div class="tmdb-empty-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3 class="tmdb-empty-title">No movies found</h3>
+                <p class="tmdb-empty-text">We couldn't find any movies matching "{{ query }}". Try a different search term.</p>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="tmdb-welcome">
+            <div class="tmdb-welcome-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+            <h2 class="tmdb-welcome-title">Discover Movies</h2>
+            <p class="tmdb-welcome-text">Search for any movie to add it to your watchlist</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

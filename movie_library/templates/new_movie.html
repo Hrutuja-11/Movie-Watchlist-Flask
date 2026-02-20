@@ -1,0 +1,55 @@
+{% from "macros/fields.html" import render_text_field %}
+{% extends "layout.html" %}
+
+{% block head_content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}"/>
+{% endblock %}
+
+{% block main_content %}
+<div class="form-page">
+    <div class="form-page__header">
+        <a href="{{ url_for('pages.index') }}" class="form-page__back">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Watchlist
+        </a>
+    </div>
+    
+    <div class="form-card">
+        <div class="form-card__header">
+            <div class="form-card__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+            </div>
+            <h1 class="form-card__title">Add New Movie</h1>
+            <p class="form-card__subtitle">Add a movie to your watchlist</p>
+        </div>
+        
+        <form name="add_movie" method="post" novalidate class="form-card__form">
+            {{ form.hidden_tag() }}
+            
+            <div class="form-card__group">
+                <label class="form-card__label">Movie Title</label>
+                {{ form.title(class_="form-card__input", placeholder="Enter movie title") }}
+            </div>
+            
+            <div class="form-card__group">
+                <label class="form-card__label">Director</label>
+                {{ form.director(class_="form-card__input", placeholder="Enter director name") }}
+            </div>
+            
+            <div class="form-card__group">
+                <label class="form-card__label">Release Year</label>
+                {{ form.year(class_="form-card__input", placeholder="e.g., 2024") }}
+            </div>
+            
+            <div class="form-card__actions">
+                {{ form.submit(class_="form-card__button form-card__button--primary") }}
+                <a href="{{ url_for('pages.index') }}" class="form-card__button form-card__button--secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
