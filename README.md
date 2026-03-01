@@ -36,6 +36,7 @@ The UI is built using **HTML/CSS/Jinja templates** and the backend is powered by
 | TMDB API | Movie data |
 | HTML/CSS | Frontend UI |
 | Jinja templates | Dynamic rendering |
+| MongoDB | Database |
 
 ---
 
